@@ -17,7 +17,7 @@ import { AuthGuardServiceService } from './services/others/auth-guard-service.se
 @NgModule({
   declarations: [
     AppComponent,
-    ConnectionComponent
+    ConnectionComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +33,7 @@ import { AuthGuardServiceService } from './services/others/auth-guard-service.se
           encryptionIv: 'sonyV',
           encryptionSalt: 'sonyS'
       }
-  })
+  }),
   ],
   providers: [AuthGuardServiceService],
   bootstrap: [AppComponent]

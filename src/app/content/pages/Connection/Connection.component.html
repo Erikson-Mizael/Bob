@@ -3,6 +3,9 @@
     <div class="shadow p-3 mb-5 bg-white rounded">
       <p class="h3">Login</p>
       <br>
+      <div *ngIf="warning" class="alert alert-warning" role="alert">
+        Usuario ou senha incorreto
+      </div>
       <form class="form-group" [formGroup]="form" (ngSubmit)="conect()">
         <input type="text" class="form-control" placeholder="Username" formControlName="username" />
         <input type="password" class="form-control" placeholder="Password" formControlName="password" />

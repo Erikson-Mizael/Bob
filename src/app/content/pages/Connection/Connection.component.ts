@@ -26,8 +26,7 @@ export class ConnectionComponent implements OnInit {
     name: '',
     online: false
   }
-
-
+  public warning: boolean = false;
   constructor(
     private formBuild: FormBuilder,
     private credentials: CredentialsService,
@@ -55,18 +54,21 @@ export class ConnectionComponent implements OnInit {
 
   //TODO Create connection
   conect(): void {
-  //? define values
+    //? define values
     this.data.username = this.getValues('username')
     this.data.password = this.getValues('password')
-  //?---------------
+    //?---------------
     this.credentials.getToken(this.data.username, this.data.password);
     setTimeout(() => {
       this.check()
+      if (!this.check()) {
+        this.errorLogin()
+      }
     }, 1500);
   }
 
   //TODO Check permission
-  check(): boolean{
+  check(): boolean {
     if (this.credentials.permission()) {
       this.redirect.to('home')
       return this.credentials.permission()
@@ -74,4 +76,9 @@ export class ConnectionComponent implements OnInit {
     return this.credentials.permission()
   }
 
+  //TODO message
+  errorLogin() {
+    this.warning = true
+
+  }
 }

@@ -15,7 +15,7 @@ const routes: Routes = [
 
   {
     path: 'login',
-    component: ConnectionComponent
+    component: ConnectionComponent,
   },
 
   {
