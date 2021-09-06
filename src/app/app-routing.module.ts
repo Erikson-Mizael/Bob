@@ -3,12 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from './content/messages/error/not-found/not-found.component';
 import { ConnectionComponent } from './content/pages/Connection/Connection.component';
 import { HomeComponent } from './content/pages/home/home.component';
+import { AuthGuardServiceService } from './services/others/auth-guard-service.service';
 
 const routes: Routes = [
 
   {
     path: 'home',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [AuthGuardServiceService]
   },
 
   {

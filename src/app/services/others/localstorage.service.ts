@@ -1,34 +1,33 @@
 import { Injectable } from '@angular/core';
+import { LocalStorageServiceEncrypt } from 'angular-2-local-storage-encrypt';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocalstorageService {
 
-  private storage: Storage;
+  constructor(
+    private storage: LocalStorageServiceEncrypt
+  ) {}
 
-  constructor() {
-    this.storage = window.localStorage;
-  }
   // TODO Save to localstorage
   set(key: string, value: string): string {
     if (this.storage) {
-      this.storage.setItem(key, value);
+      this.storage.set(key, value);
       return `Item saved (${value}) | key (${key})`;
     }
     return `Unsaved item (${value}) | key (${key})   `;
   }
   // TODO Get from localstorage
-  get(key: string): string {
+  get(key: string): any {
     if (this.storage) {
-      return `Item returned ${this.storage.getItem(key)}`
+      return this.storage.get(key)
     }
-    return 'Item not returned';
   }
   // TODO Remove item from localstorage
   remove(key: string): string {
     if (this.storage) {
-      this.storage.removeItem(key);
+      this.storage.remove(key);
       return `Item removed ${this.get(key)} key (${key})`;
     }
     return `Item not removed from key (${key})`;;
@@ -36,7 +35,7 @@ export class LocalstorageService {
   // TODO Clear all localstorage
   clear(): string {
     if (this.storage) {
-      this.storage.clear();
+      this.storage.clearAll();
       return `localstorage clean`;
     }
     return `localstorage not clean`;

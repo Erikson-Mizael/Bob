@@ -8,6 +8,9 @@ import { AppComponent } from './app.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { ConnectionComponent } from './content/pages/Connection/Connection.component';
+import { HttpClientModule } from '@angular/common/http';
+import { LocalStorageModule } from 'angular-2-local-storage-encrypt';
+import { AuthGuardServiceService } from './services/others/auth-guard-service.service';
 
 //* --------------------
 
@@ -19,9 +22,20 @@ import { ConnectionComponent } from './content/pages/Connection/Connection.compo
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    LocalStorageModule.forRoot({
+      prefix: 'Bob',
+      storageType: 'localStorage',
+      encryptionActive: true,
+      encryptionOptions: {
+          encryptionKey: 'sonyK',
+          encryptionIv: 'sonyV',
+          encryptionSalt: 'sonyS'
+      }
+  })
   ],
-  providers: [],
+  providers: [AuthGuardServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

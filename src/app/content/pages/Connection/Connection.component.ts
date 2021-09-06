@@ -3,7 +3,9 @@ import { Component, OnInit } from '@angular/core';
 // * Imports made manually
 
 import { FormBuilder, Validators } from '@angular/forms';
+import { CredentialsService } from 'src/app/services/keys/credentials.service';
 import { LocalstorageService } from 'src/app/services/others/localstorage.service';
+import { RedirectService } from 'src/app/services/others/redirect.service';
 
 // * ---------------------
 
@@ -20,13 +22,19 @@ export class ConnectionComponent implements OnInit {
     username: String,
     password: String
   };
+  public userOnline: any = {
+    name: '',
+    online: false
+  }
 
 
   constructor(
     private formBuild: FormBuilder,
-    private lstorage: LocalstorageService
+    private credentials: CredentialsService,
+    private redirect: RedirectService
   ) {
     this.crationForm()
+    this.check()
   }
 
   ngOnInit() {
@@ -50,7 +58,20 @@ export class ConnectionComponent implements OnInit {
   //? define values
     this.data.username = this.getValues('username')
     this.data.password = this.getValues('password')
-    this.lstorage.set('username', this.data.username)
+  //?---------------
+    this.credentials.getToken(this.data.username, this.data.password);
+    setTimeout(() => {
+      this.check()
+    }, 1500);
+  }
+
+  //TODO Check permission
+  check(): boolean{
+    if (this.credentials.permission()) {
+      this.redirect.to('home')
+      return this.credentials.permission()
+    }
+    return this.credentials.permission()
   }
 
 }
