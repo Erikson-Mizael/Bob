@@ -1,12 +1,17 @@
-<br>
-<div class="container">
-  <form>
-    <div class="form-group" [formGroup]="form" (ngSubmit)="conect()">
-      <input type="text" class="form-control" placeholder="Username" formControlName="username" />
-      <input type="password" class="form-control" placeholder="Password" formControlName="password" />
-      <button type="submit" [disabled]="!this.form.valid" class="btn btn-primary px-4">
-        Login
-      </button>
+<body>
+  <div class="main">
+    <div class="shadow p-3 mb-5 bg-white rounded">
+      <p class="h3">Login</p>
+      <br>
+      <form class="form-group" [formGroup]="form" (ngSubmit)="conect()">
+
+        <input type="text" class="form-control" placeholder="Username" formControlName="username" />
+        <input type="password" class="form-control" placeholder="Password" formControlName="password" />
+        <br>
+        <button type="submit" [disabled]="!this.form.valid" class="btn btn-outline-primary ">
+          Login
+        </button>
+      </form>
     </div>
-  </form>
-</div>
+  </div>
+</body>

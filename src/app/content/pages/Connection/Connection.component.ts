@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 // * Imports made manually
 
 import { FormBuilder, Validators } from '@angular/forms';
+import { LocalstorageService } from 'src/app/services/others/localstorage.service';
 
 // * ---------------------
 
@@ -12,10 +13,18 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./Connection.component.scss']
 })
 export class ConnectionComponent implements OnInit {
+
+  //? variables
   public form: any;
+  public data: any = {
+    username: String,
+    password: String
+  };
+
 
   constructor(
-    private formBuild: FormBuilder
+    private formBuild: FormBuilder,
+    private lstorage: LocalstorageService
   ) {
     this.crationForm()
   }
@@ -32,9 +41,16 @@ export class ConnectionComponent implements OnInit {
   }
 
   //TODO get values
-  getValues(): void { }
+  getValues(need: string): void {
+    return this.form.get(need).value
+  }
 
   //TODO Create connection
-  conect(): void { }
+  conect(): void {
+  //? define values
+    this.data.username = this.getValues('username')
+    this.data.password = this.getValues('password')
+    this.lstorage.set('username', this.data.username)
+  }
 
 }

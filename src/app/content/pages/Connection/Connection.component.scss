@@ -1,1 +1,18 @@
+//? Main
+$widMain:100vw;
+$heiMain:100vh;
+$mainBackColor: #bbbfcaad;
 
+.main {
+  width: $widMain;
+  height: $heiMain;
+  background: $mainBackColor;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+body {
+  margin: 0px;
+}
